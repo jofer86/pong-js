@@ -5,8 +5,8 @@ const canvasContext = canvas.getContext('2d');
 let ballX = 400;
 let ballY = 300;
 // Ball Speed
-let ballSpeedX = 2;
-let ballSpeedY = 2;
+let ballSpeedX = 1;
+let ballSpeedY = 1;
 // Paddles Horizontal Position
 let paddle1Y = 250;
 let paddle2Y = 250;
@@ -65,11 +65,11 @@ const moveEverything = () => {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY -= 3;
+      ballSpeedY += -3;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY -= 2;
+      ballSpeedY += -2;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
@@ -80,7 +80,7 @@ const moveEverything = () => {
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += 2;
+      ballSpeedY += 3;
     }
     else {
       playerScore++;
@@ -95,11 +95,11 @@ const moveEverything = () => {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY -= 3;
+      ballSpeedY += -3;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY -= 2;
+      ballSpeedY += -2;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
@@ -110,7 +110,7 @@ const moveEverything = () => {
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += 2;
+      ballSpeedY += 3;
     } else {
       compScore++;
       resetBall();
