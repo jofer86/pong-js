@@ -2,16 +2,20 @@ const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
 
 // Ball Position
-let ballX = 75;
-let ballY = 75;
+let ballX = 400;
+let ballY = 300;
 // Ball Speed
 let ballSpeedX = 2;
 let ballSpeedY = 2;
 // Paddles Horizontal Position
 let paddle1Y = 250;
 let paddle2Y = 250;
+// Padle Constants
 const PADDLEHEIGHT = 100;
 const PADDLETHICK = 10;
+// Scores
+let playerScore = 0;
+let compScore = 0;
 
 // Edge of Screen Constants
 const [edge0, edgeX, edgeY] = [0, canvas.width, canvas.height]
@@ -45,13 +49,32 @@ const drawEverything = () => {
   // Player Paddle Paddle
   drawRectangle('white', 0, paddle1Y, PADDLETHICK, PADDLEHEIGHT);
   // Computer Paddle
-  drawRectangle('white', 790, paddle2Y, PADDLETHICK, PADDLEHEIGHT);
+  drawRectangle('white', 790, paddle1Y, PADDLETHICK, PADDLEHEIGHT);
+  // Middle Line
+  drawRectangle('white', 400, 0, 5, 600)
+  // Scores!
+  canvasContext.font = "60px Arial"
+  canvasContext.fillText(`${playerScore}`, 200, 50);
+  canvasContext.fillText(`${compScore}`, 600, 50);
 }
 
 const moveEverything = () => {
   // Detects when the ball hits an edge and makes it bounce.  
   if (ballX > edgeX) {
-    ballSpeedX *= -1;
+    if (ballY > paddle1Y && ballY < paddle1Y + 20) {
+      ballSpeedX *= -1;
+      ballSpeedY += 3;
+    } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 60) {
+      ballSpeedX *= -1;
+      ballSpeedY = 0;
+    } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + PADDLEHEIGHT) {
+      ballSpeedX *= -1;
+      ballSpeedY += 3;
+    }
+    else {
+      playerScore++;
+      resetBall();
+    }    
   }
   if (ballY > edgeY) {
     ballSpeedY *= -1;
@@ -61,6 +84,7 @@ const moveEverything = () => {
     if (ballY > paddle1Y && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
     } else {
+      compScore++;
       resetBall();
     }    
   }
@@ -90,7 +114,10 @@ const resetBall = () => {
   ballY = 300;
 }
 
+// Scores
+
+
 const moveAll = () => {
   drawEverything();
-  moveEverything();
+  moveEverything();  
 }
