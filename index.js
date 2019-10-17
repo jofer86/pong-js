@@ -5,8 +5,8 @@ const canvasContext = canvas.getContext('2d');
 let ballX = 400;
 let ballY = 300;
 // Ball Speed
-let ballSpeedX = 2;
-let ballSpeedY = 2;
+let ballSpeedX = 4;
+let ballSpeedY = 4;
 // Paddles Horizontal Position
 let paddle1Y = 250;
 let paddle2Y = 250;
@@ -42,7 +42,23 @@ const drawRectangle = (color, x, y, width, height) => {
   canvasContext.fillRect(x, y, width, height);
 }
 
+const moveCompPaddle = () => {
+  let compare = (paddle2Y + PADDLEHEIGHT) - 50;
+  let padSpeed = 0;
+
+  if (compare < ballY) {
+    padSpeed = 5;
+    paddle2Y += padSpeed;
+  }
+  if (compare > ballY) {
+    padSpeed = -5;
+    paddle2Y += padSpeed
+  }
+  
+}
+
 const drawEverything = () => {
+  moveCompPaddle();
   // Background
   drawRectangle('black', 0, 0, canvas.width, canvas.height);
   // Ball
@@ -50,7 +66,7 @@ const drawEverything = () => {
   // Player Paddle Paddle
   drawRectangle('white', 0, paddle1Y, PADDLETHICK, PADDLEHEIGHT);
   // Computer Paddle
-  drawRectangle('white', 790, paddle1Y, PADDLETHICK, PADDLEHEIGHT);
+  drawRectangle('white', 790, paddle2Y, PADDLETHICK, PADDLEHEIGHT);
   // Middle Line
   drawRectangle('white', 400, 0, 5, 600)
   // Scores!
@@ -63,25 +79,25 @@ const moveEverything = () => {
   // Detects when the ball hits a Paddle and makes it bounce, according
   // to where the ball hits the paddle.
   if (ballX > edgeX) {
-    if (ballY > paddle1Y && ballY < paddle1Y + 20) {
+    if (ballY > paddle2Y && ballY < paddle2Y + 20) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = -4;
-    } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
+      ballSpeedY = -8;
+    } else if (ballY > paddle2Y + 20 && ballY < paddle2Y + 40) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = -2;
-    } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
+      ballSpeedY = -6;
+    } else if (ballY > paddle2Y + 40 && ballY < paddle2Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
-    } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
+    } else if (ballY > paddle2Y + 60 && ballY < paddle2Y + 80) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = 2;
-    }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
+      ballSpeedY = 6;
+    }else if (ballY > paddle2Y + 80 && ballY < paddle2Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = 4;
+      ballSpeedY = 8;
     }
     else {
       playerScore++;
@@ -96,22 +112,22 @@ const moveEverything = () => {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = -4;
+      ballSpeedY = -8;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = -2;
+      ballSpeedY = -6;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
     } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = 2;
+      ballSpeedY = 6;
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY = -4;
+      ballSpeedY = 8;
     } else {
       compScore++;
       resetBall();
@@ -142,12 +158,7 @@ const resetBall = () => {
   ballX = 400;
   ballY = 300;
 }
-
-// Scores
-
-
 const moveAll = () => {
   drawEverything();
-  moveEverything();
-  console.log(ballSpeedY)
+  moveEverything();  
 }
