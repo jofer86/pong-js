@@ -15,7 +15,7 @@ const PADDLEHEIGHT = 100;
 const [edge0, edgeX, edgeY] = [0, canvas.width, canvas.height]
 
 window.onload = () => {
-  setInterval(moveAll, 1000 / 60);
+  setInterval(moveAll, 1000 / 80);
   // Calculates mouse position and updates the vert position of the paddle.
   canvas.addEventListener('mousemove', e => {
     let mousePos = calcMousePos(e);
@@ -55,7 +55,11 @@ const moveEverything = () => {
     ballSpeedY *= -1;
   }
   if (ballX < edge0) {
-    ballSpeedX *= -1;
+    if (ballY > paddle1Y && ballY < paddle1Y + PADDLEHEIGHT) {
+      ballSpeedX *= -1;
+    } else {
+      resetBall();
+    }    
   }
   if (ballY < edge0) {
     ballSpeedY *= -1;
@@ -64,7 +68,6 @@ const moveEverything = () => {
   ballX += ballSpeedX;
   ballY += ballSpeedY;
 }
-
 
 // Calculating mouse position in relation to the site scroll and play area
 const calcMousePos = e => {
@@ -76,6 +79,13 @@ const calcMousePos = e => {
     x: mouseX,
     y: mouseY
   };
+}
+
+// Reset ball position
+
+const resetBall = () => {
+  ballX = 400;
+  ballY = 300;
 }
 
 const moveAll = () => {
