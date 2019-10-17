@@ -18,7 +18,7 @@ let playerScore = 0;
 let compScore = 0;
 
 // Edge of Screen Constants
-const [edge0, edgeX, edgeY] = [0, canvas.width, canvas.height]
+const [edge0, edgeX, edgeY] = [10, canvas.width - 10, canvas.height]
 
 window.onload = () => {
   setInterval(moveAll, 1000 / 80);
@@ -59,17 +59,28 @@ const drawEverything = () => {
 }
 
 const moveEverything = () => {
-  // Detects when the ball hits an edge and makes it bounce.  
+  // Detects when the ball hits a Paddle and makes it bounce, according
+  // to where the ball hits the paddle.
   if (ballX > edgeX) {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
-      ballSpeedY += 3;
-    } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 60) {
+      ballSpeedY *= -1;
+      ballSpeedY -= 3;
+    } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
+      ballSpeedX *= -1;
+      ballSpeedY *= -1;
+      ballSpeedY -= 2;
+    } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
-    } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + PADDLEHEIGHT) {
+    } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
       ballSpeedX *= -1;
-      ballSpeedY += 3;
+      ballSpeedY *= -1;
+      ballSpeedY += 2;
+    }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
+      ballSpeedX *= -1;
+      ballSpeedY *= -1;
+      ballSpeedY += 2;
     }
     else {
       playerScore++;
@@ -81,8 +92,25 @@ const moveEverything = () => {
   }
   // Detects if the ball hit the paddle, or goes over the edge;
   if (ballX < edge0) {
-    if (ballY > paddle1Y && ballY < paddle1Y + PADDLEHEIGHT) {
+    if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
+      ballSpeedY *= -1;
+      ballSpeedY -= 3;
+    } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
+      ballSpeedX *= -1;
+      ballSpeedY *= -1;
+      ballSpeedY -= 2;
+    } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
+      ballSpeedX *= -1;
+      ballSpeedY = 0;
+    } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
+      ballSpeedX *= -1;
+      ballSpeedY *= -1;
+      ballSpeedY += 2;
+    }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
+      ballSpeedX *= -1;
+      ballSpeedY *= -1;
+      ballSpeedY += 2;
     } else {
       compScore++;
       resetBall();
