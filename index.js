@@ -5,8 +5,8 @@ const canvasContext = canvas.getContext('2d');
 let ballX = 400;
 let ballY = 300;
 // Ball Speed
-let ballSpeedX = 1;
-let ballSpeedY = 1;
+let ballSpeedX = 2;
+let ballSpeedY = 2;
 // Paddles Horizontal Position
 let paddle1Y = 250;
 let paddle2Y = 250;
@@ -21,12 +21,13 @@ let compScore = 0;
 const [edge0, edgeX, edgeY] = [10, canvas.width - 10, canvas.height]
 
 window.onload = () => {
-  setInterval(moveAll, 1000 / 80);
+  setInterval(moveAll, 1000 / 60);
   // Calculates mouse position and updates the vert position of the paddle.
   canvas.addEventListener('mousemove', e => {
     let mousePos = calcMousePos(e);
     paddle1Y = mousePos.y - (PADDLEHEIGHT / 2);
   })
+  
 }
 
 const drawCircle = (color, x, y, radius) => {
@@ -65,22 +66,22 @@ const moveEverything = () => {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += -3;
+      ballSpeedY = -4;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += -2;
+      ballSpeedY = -2;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
     } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += 2;
+      ballSpeedY = 2;
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += 3;
+      ballSpeedY = 4;
     }
     else {
       playerScore++;
@@ -95,22 +96,22 @@ const moveEverything = () => {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += -3;
+      ballSpeedY = -4;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += -2;
+      ballSpeedY = -2;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
     } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += 2;
+      ballSpeedY = 2;
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
       //ballSpeedY *= -1;
-      ballSpeedY += 3;
+      ballSpeedY = -4;
     } else {
       compScore++;
       resetBall();
@@ -147,5 +148,6 @@ const resetBall = () => {
 
 const moveAll = () => {
   drawEverything();
-  moveEverything();  
+  moveEverything();
+  console.log(ballSpeedY)
 }
