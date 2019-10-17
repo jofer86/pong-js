@@ -64,22 +64,22 @@ const moveEverything = () => {
   if (ballX > edgeX) {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY -= 3;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY -= 2;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
     } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY += 2;
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY += 2;
     }
     else {
@@ -94,22 +94,22 @@ const moveEverything = () => {
   if (ballX < edge0) {
     if (ballY > paddle1Y && ballY < paddle1Y + 20) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY -= 3;
     } else if (ballY > paddle1Y + 20 && ballY < paddle1Y + 40) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY -= 2;
     } else if (ballY > paddle1Y + 40 && ballY < paddle1Y + 60) {
       ballSpeedX *= -1;
       ballSpeedY = 0;
     } else if (ballY > paddle1Y + 60 && ballY < paddle1Y + 80) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY += 2;
     }else if (ballY > paddle1Y + 80 && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
-      ballSpeedY *= -1;
+      //ballSpeedY *= -1;
       ballSpeedY += 2;
     } else {
       compScore++;
