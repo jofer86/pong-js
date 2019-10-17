@@ -9,7 +9,9 @@ let ballSpeedX = 2;
 let ballSpeedY = 2;
 // Paddles Horizontal Position
 let paddle1Y = 250;
+let paddle2Y = 250;
 const PADDLEHEIGHT = 100;
+const PADDLETHICK = 10;
 
 // Edge of Screen Constants
 const [edge0, edgeX, edgeY] = [0, canvas.width, canvas.height]
@@ -38,12 +40,12 @@ const drawRectangle = (color, x, y, width, height) => {
 const drawEverything = () => {
   // Background
   drawRectangle('black', 0, 0, canvas.width, canvas.height);
-
   // Ball
   drawCircle('white', ballX, ballY, 10);
-
-  // Left Paddle
-  drawRectangle('white', 0, paddle1Y, 10, PADDLEHEIGHT)  
+  // Player Paddle Paddle
+  drawRectangle('white', 0, paddle1Y, PADDLETHICK, PADDLEHEIGHT);
+  // Computer Paddle
+  drawRectangle('white', 790, paddle2Y, PADDLETHICK, PADDLEHEIGHT);
 }
 
 const moveEverything = () => {
@@ -54,6 +56,7 @@ const moveEverything = () => {
   if (ballY > edgeY) {
     ballSpeedY *= -1;
   }
+  // Detects if the ball hit the paddle, or goes over the edge;
   if (ballX < edge0) {
     if (ballY > paddle1Y && ballY < paddle1Y + PADDLEHEIGHT) {
       ballSpeedX *= -1;
@@ -82,7 +85,6 @@ const calcMousePos = e => {
 }
 
 // Reset ball position
-
 const resetBall = () => {
   ballX = 400;
   ballY = 300;
