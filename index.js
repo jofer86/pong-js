@@ -43,8 +43,13 @@ const drawRectangle = (color, x, y, width, height) => {
 }
 
 const moveCompPaddle = () => {
+  let noShake = 35;
   let compare = (paddle2Y + PADDLEHEIGHT) - 50;
   let padSpeed = 0;
+
+  if (Math.abs(compare - ballY) < noShake) {
+    return;
+  }
 
   if (compare < ballY) {
     padSpeed = 5;
@@ -157,6 +162,7 @@ const calcMousePos = e => {
 const resetBall = () => {
   ballX = 400;
   ballY = 300;
+  ballSpeedY = 2;
 }
 const moveAll = () => {
   drawEverything();
